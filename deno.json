@@ -1,6 +1,7 @@
 {
   "tasks": {
     "build": "deno bundle --unsafely-ignore-certificate-errors src/main.ts dist/bundle.js",
-    "serve": "deno run --allow-net --allow-read jsr:@std/http/file-server"
+    "serve": "deno run --allow-net --allow-read jsr:@std/http/file-server",
+    "test": "deno test --unsafely-ignore-certificate-errors"
   }
 }

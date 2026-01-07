@@ -3,6 +3,7 @@
 .DS_Store
 dist
 node_modules
+deno.lock
 src/dastemplate.js
 src/index.html
 src/dasmaker.js
