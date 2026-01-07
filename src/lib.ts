@@ -4,7 +4,7 @@
 // lib.show() が使える
 //
 
-import $ from './jquery.js';
+import $ from './jquery.ts';
 
 declare const dastemplate: { dastemplate: string };
 

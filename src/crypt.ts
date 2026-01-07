@@ -6,7 +6,7 @@
 // Converted to TypeScript: 2026/01/07
 //
 
-import { MD5_hexhash } from './md5.js';
+import { MD5_hexhash } from './md5.ts';
 
 // 文字種ごとに置換を行なうためのテーブル
 const origcharset = [

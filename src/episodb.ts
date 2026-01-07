@@ -1,5 +1,5 @@
-import $ from './jquery.js';
-import { lib } from './lib.js';
+import $ from './jquery.ts';
+import { lib } from './lib.ts';
 
 declare const db: any;
 declare let questions: string[];

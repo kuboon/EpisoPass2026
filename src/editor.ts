@@ -8,9 +8,9 @@
 //  Converted to TypeScript: 2026/01/07
 //
 
-import $ from './jquery.js';
-import { lib } from './lib.js';
-import { crypt } from './crypt.js';
+import $ from './jquery.ts';
+import { lib } from './lib.ts';
+import { crypt } from './crypt.ts';
 
 declare let data: any;
 declare let questions: string[];

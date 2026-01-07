@@ -1,6 +1,6 @@
-import $ from './jquery.js';
-import { lib } from './lib.js';
-import { editor } from './editor.js';
+import $ from './jquery.ts';
+import { lib } from './lib.ts';
+import { editor } from './editor.ts';
 
 export function easy(): void {
     function shuffle(array: any[], n: number): void {

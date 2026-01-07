@@ -2,12 +2,12 @@
 // EpisoPassの入口
 //
 
-import $ from "./jquery.js";
-import { editor, answer } from "./editor.js";
-import { crypt } from "./crypt.js";
-import { lib } from "./lib.js";
-import { episodb, EpisoPassデータ作成 } from "./episodb.js";
-import sampledb from "./sampledb.json";
+import $ from "./jquery.ts";
+import { editor, answer } from "./editor.ts";
+import { crypt } from "./crypt.ts";
+import { lib } from "./lib.ts";
+import { episodb, EpisoPassデータ作成 } from "./episodb.ts";
+import sampledb from "./sampledb.json" with { type: "json" };
 
 // これらは ERB で生成されるファイルから来る (現時点では declare で対応)
 declare const dasmaker: any;
