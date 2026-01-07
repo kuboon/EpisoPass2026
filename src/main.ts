@@ -6,10 +6,10 @@ import $ from "./jquery.js";
 import { editor, answer } from "./editor.js";
 import { crypt } from "./crypt.js";
 import { lib } from "./lib.js";
+import { episodb, EpisoPassデータ作成 } from "./episodb.js";
 import sampledb from "./sampledb.json";
 
 // これらは ERB で生成されるファイルから来る (現時点では declare で対応)
-declare const episodas: any;
 declare const dasmaker: any;
 declare const dastemplate: any;
 
@@ -85,14 +85,12 @@ const main = async function(): Promise<void> {
 	$('#dasbutton').css('display', 'none');
     });
     $("#episodbbutton").click(() => {
-	const { episodb } = require("./episodb.js");
 	episodb();
     });
     $("#editbutton").click(() => editor());
     $("#dasbutton").off(); // 何度も登録されて困った
     $("#dasbutton").click(() => dasmaker.dasmaker(data, answer()));
     
-    const { EpisoPassデータ作成 } = require("./episodb.js");
     EpisoPassデータ作成();
     
     const qas = [];
@@ -110,7 +108,6 @@ const main = async function(): Promise<void> {
 	editor(data); // 回答画面へ
     }
     else if (args['data']) {
-	const { episodb } = require("./episodb.js");
 	episodb(); // データベース編集画面へ
     }
     else {

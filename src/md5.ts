@@ -75,31 +75,31 @@ var MD5_round4 = new Array(new Array( 0, 6,49), new Array( 7,10,50),
 			   new Array( 4, 6,61), new Array(11,10,62),
 			   new Array( 2,15,63), new Array( 9,21,64));
 
-function MD5_F(x: any, y: any, z: any): number { return (x & y) | (~x & z); }
-function MD5_G(x: any, y: any, z: any): number { return (x & z) | (y & ~z); }
-function MD5_H(x: any, y: any, z: any): number { return x ^ y ^ z;          }
-function MD5_I(x: any, y: any, z: any): number { return y ^ (x | ~z);       }
+function MD5_F(x: number, y: number, z: number): number { return (x & y) | (~x & z); }
+function MD5_G(x: number, y: number, z: number): number { return (x & z) | (y & ~z); }
+function MD5_H(x: number, y: number, z: number): number { return x ^ y ^ z;          }
+function MD5_I(x: number, y: number, z: number): number { return y ^ (x | ~z);       }
 
 var MD5_round: any = [[MD5_F, MD5_round1],
 			  [MD5_G, MD5_round2],
 			  [MD5_H, MD5_round3],
 			  [MD5_I, MD5_round4]];
 
-function MD5_pack(n32) {
+function MD5_pack(n32: number): string {
   return String.fromCharCode(n32 & 0xff) +
 	 String.fromCharCode((n32 >>> 8) & 0xff) +
 	 String.fromCharCode((n32 >>> 16) & 0xff) +
 	 String.fromCharCode((n32 >>> 24) & 0xff);
 }
 
-function MD5_unpack(s4) {
+function MD5_unpack(s4: string): number {
   return  s4.charCodeAt(0)        |
 	 (s4.charCodeAt(1) <<  8) |
 	 (s4.charCodeAt(2) << 16) |
 	 (s4.charCodeAt(3) << 24);
 }
 
-function MD5_number(n) {
+function MD5_number(n: number): number {
   while (n < 0)
     n += 4294967296;
   while (n > 4294967295)
@@ -107,7 +107,7 @@ function MD5_number(n) {
   return n;
 }
 
-function MD5_apply_round(x, s, f, abcd, r) {
+function MD5_apply_round(x: any, s: any, f: any, abcd: any, r: any): void {
   var a, b, c, d;
   var kk, ss, ii;
   var t, u;
@@ -128,7 +128,7 @@ function MD5_apply_round(x, s, f, abcd, r) {
   s[a] = MD5_number(t);
 }
 
-function MD5_hash(data) {
+function MD5_hash(data: string): string {
   var abcd, x, state, s;
   var len, index, padLen, f, r;
   var i, j, k;
