@@ -1,26 +1,19 @@
 .PHONY: test
 
 # all: compile dasmaker episodas template index pack embed scp cp
-all: compile dasmaker episodas template index pack embed cp
+all: dasmaker episodas template index pack embed cp
 
-allcp: compile dasmaker episodas template index pack embed scp cp
+allcp: dasmaker episodas template index pack embed scp cp
 
 install:
 	npm install
 pack:
-	webpack
+	npm run build
+
 embed:
 	-/bin/rm -f dist/episopass.html
 	ruby bin/embed.rb src/index.html > dist/episopass.html
 	chmod 444 dist/episopass.html
-
-compile:
-	-/bin/rm -f src/editor.js
-	coffee -b -c src/editor.coffee
-	chmod 444 src/editor.js
-	-/bin/rm -f src/crypt.js
-	coffee -c src/crypt.coffee
-	chmod 444 src/crypt.js
 
 index:
 	-/bin/rm -f src/index.html
@@ -44,9 +37,10 @@ template: src/episodas.html.erb src/sampledata.json
 	chmod 444 src/dastemplate.js
 
 clean:
-	-/bin/rm -f bundle.js
-	-/bin/rm -f src/editor.js
-	-/bin/rm -f src/crypt.js
+	-/bin/rm -f dist/bundle.js
+	-/bin/rm -f src/dasmaker.js
+	-/bin/rm -f src/episodas.js
+	-/bin/rm -f src/dastemplate.js
 	-/bin/rm -f *~
 	-/bin/rm -f .gitignore~
 	-/bin/rm -f */*~
