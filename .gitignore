@@ -9,6 +9,7 @@ src/dastemplate.js
 src/index.html
 src/dasmaker.js
 src/episodas.js
+src/jquery-old.js
 package-lock.json
 test-jest/package.json
 test-jest/yarn.lock
