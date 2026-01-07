@@ -5,7 +5,6 @@ dist
 node_modules
 deno.lock
 src/dastemplate.js
-src/index.html
 src/dasmaker.js
 src/episodas.js
 src/jquery-old.js
