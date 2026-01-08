@@ -22,4 +22,3 @@ deno task serve  # Start local file server
 <ul>
   <li>pushstate利用して「戻る」を有効に</li>
 </ul>
-

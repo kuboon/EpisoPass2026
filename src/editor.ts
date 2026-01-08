@@ -1,6 +1,6 @@
 //
 //  editor.ts - EpisoPass問題編集画面
-// 
+//
 //  Toshiyuki Masui @ Pitecan.com
 //  Modified       2015/10/31 19:12:53
 //  Modified       2018/02/23 17:24:33 for heroku
@@ -8,9 +8,30 @@
 //  Converted to TypeScript: 2026/01/07
 //
 
-import $ from './jquery.ts';
-import { lib } from './lib.ts';
-import { crypt } from './crypt.ts';
+import { lib } from "./lib.ts";
+import { crypt } from "./crypt.ts";
+
+// DOM操作ヘルパー関数
+function createElement<K extends keyof HTMLElementTagNameMap>(
+  tagName: K,
+  attrs?: Record<string, string>,
+  styles?: Partial<CSSStyleDeclaration>,
+): HTMLElementTagNameMap[K] {
+  const el = document.createElement(tagName);
+  if (attrs) {
+    Object.entries(attrs).forEach(([key, value]) => {
+      if (key === "class") {
+        el.className = value;
+      } else {
+        el.setAttribute(key, value);
+      }
+    });
+  }
+  if (styles) {
+    Object.assign(el.style, styles);
+  }
+  return el;
+}
 
 declare let data: any;
 declare let questions: string[];
@@ -26,9 +47,12 @@ export function editor(dataArg?: any): void {
   console.log("data-----");
   console.log(data);
 
-  $('#descbuttondiv').css('background', '#555');
-  $('#episodbbuttondiv').css('background', '#555');
-  $('#editbuttondiv').css('background', '#999');
+  (document.querySelector("#descbuttondiv") as HTMLElement).style.background =
+    "#555";
+  (document.querySelector("#episodbbuttondiv") as HTMLElement).style
+    .background = "#555";
+  (document.querySelector("#editbuttondiv") as HTMLElement).style.background =
+    "#999";
 
   const globaldata = data; // グローバル変数「data」にアクセスするための苦しい工夫
   const name = data.name;
@@ -41,23 +65,33 @@ export function editor(dataArg?: any): void {
   const selfunc = (q: number, a: number) => { // q番目の質問のa番目の選択肢をクリックしたとき呼ばれる関数
     return () => {
       answerArray[q] = a;
-      for (let i = 0; i < qas[q]['answers'].length; i++) {
-        $(`#answer${q}-${i}`).css('background-color', i == a ? '#555' : '#fff');
-        $(`#answer${q}-${i}`).css('color', i == a ? '#fff' : '#555');
+      for (let i = 0; i < qas[q]["answers"].length; i++) {
+        const elem = document.querySelector(
+          `#answer${q}-${i}`,
+        ) as HTMLInputElement;
+        if (elem) {
+          elem.style.backgroundColor = i == a ? "#555" : "#fff";
+          elem.style.color = i == a ? "#fff" : "#555";
+        }
       }
       calcpass(true);
     };
   };
-  
+
   const editfunc = (q: number, a: number) => { // q番目の質問のa番目の選択肢を編集したとき呼ばれる関数
     return () => {
       curq = q;
       cura = a;
-      qas[q]['answers'][a] = $(`#answer${q}-${a}`).val();
+      const elem = document.querySelector(
+        `#answer${q}-${a}`,
+      ) as HTMLInputElement;
+      if (elem) {
+        qas[q]["answers"][a] = elem.value;
+      }
       calcpass();
     };
   };
-  
+
   let timeout: number | null = null;
   const hover_in_func = (q: number, a: number) => {
     return () => {
@@ -69,112 +103,144 @@ export function editor(dataArg?: any): void {
       if (timeout !== null) clearTimeout(timeout);
     };
   };
-  
+
   // f4ba35ab6069e8bcf9ef62bf73d12fd1.png のような表示
   const answerspan = (q: number, a: number) => { // q番目の質問のa番目の選択肢のspan
-    const aspan = $('<span class="answer">');
-    const input = $('<input type="text" autocomplete="off" class="answer">')
-      .val(qas[q]['answers'][a])
-      .attr('id', `answer${q}-${a}`)
-      .css('background-color', a == 0 ? '#555' : '#fff')
-      .css('color', a == 0 ? '#fff' : '#555')
-      .on('click', selfunc(q, a))
-      .on('keyup', editfunc(q, a));
-    aspan.append(input);
+    const aspan = createElement("span", { class: "answer" });
+    const input = createElement("input", {
+      type: "text",
+      autocomplete: "off",
+      class: "answer",
+      id: `answer${q}-${a}`,
+    }, {
+      backgroundColor: a == 0 ? "#555" : "#fff",
+      color: a == 0 ? "#fff" : "#555",
+    });
+    (input as HTMLInputElement).value = qas[q]["answers"][a];
+    input.addEventListener("click", selfunc(q, a));
+    input.addEventListener("keyup", editfunc(q, a));
+    aspan.appendChild(input);
     return aspan;
   };
-  
-  const showimage = (str: string, img: JQuery) => {
+
+  const showimage = (str: string, img: HTMLImageElement) => {
     if (str.match(/\.(png|jpeg|jpg|gif)$/i)) {
-      img.attr('src', str)
-        .css('display', 'block');
+      img.src = str;
+      img.style.display = "block";
     } else {
-      img.css('display', 'none');
+      img.style.display = "none";
     }
   };
-  
+
   const qeditfunc = (q: number) => { // q番目の問題を編集したとき呼ばれる関数
     return () => {
-      const str = $(`#question${q}`).val() as string;
-      qas[q]['question'] = str;
-      const img = $(`#image${q}`);
+      const elem = document.querySelector(`#question${q}`) as HTMLInputElement;
+      const str = elem ? elem.value : "";
+      qas[q]["question"] = str;
+      const img = document.querySelector(`#image${q}`) as HTMLImageElement;
       showimage(str, img);
       calcpass();
     };
   };
-  
+
   const minusfunc = (q: number) => { // q番目の問題の「-」ボタンを押したとき呼ばれる関数
     return () => {
-      qas[q]['answers'].pop();
-      $(`#answer${q}-${qas[q]['answers'].length}`).remove();
+      qas[q]["answers"].pop();
+      const elem = document.querySelector(
+        `#answer${q}-${qas[q]["answers"].length}`,
+      );
+      elem?.remove();
     };
   };
-  
+
   const plusfunc = (q: number) => { // q番目の問題の「+」ボタンを押したとき呼ばれる関数
     return () => {
-      const nelements = qas[q]['answers'].length;
-      qas[q]['answers'].push('新しい回答例');
-      $(`#delim${q}`).before(answerspan(q, nelements));
+      const nelements = qas[q]["answers"].length;
+      qas[q]["answers"].push("新しい回答例");
+      const delim = document.querySelector(`#delim${q}`);
+      if (delim) {
+        delim.parentNode?.insertBefore(answerspan(q, nelements), delim);
+      }
     };
   };
-  
+
   const qadiv = (q: number) => { // q番目の質問+選択肢のdiv
     answerArray[q] = 0;
-    const div = $("<div class='qadiv'>")
-      .attr('id', `qadiv${q}`);
-    const qdiv = $('<div width="100%" class="qdiv">');
-    const qstr = qas[q]['question'];
-    const qinput = $('<input type="text" autocomplete="off" class="qinput">')
-      .attr('id', `question${q}`)
-      .val(qstr)
-      .on('keyup', qeditfunc(q));
-    qdiv.append(qinput);
-    div.append(qdiv);
-      
-    const img = $("<img class='qimg'>")
-      .attr('id', `image${q}`);
-    div.append(img);
-    showimage(qstr, img);
-      
-    const ansdiv = $("<div class='ansdiv'>");
-    for (let i = 0; i < qas[q]['answers'].length; i++) {
-      ansdiv.append(answerspan(q, i));
-    }
-    const delim = $('<span>  </span>')
-      .attr('id', `delim${q}`);
-    ansdiv.append(delim);
+    const div = createElement("div", { class: "qadiv", id: `qadiv${q}` });
+    const qdiv = createElement("div", { class: "qdiv" });
+    qdiv.setAttribute("width", "100%");
+    const qstr = qas[q]["question"];
+    const qinput = createElement("input", {
+      type: "text",
+      autocomplete: "off",
+      class: "qinput",
+      id: `question${q}`,
+    });
+    (qinput as HTMLInputElement).value = qstr;
+    qinput.addEventListener("keyup", qeditfunc(q));
+    qdiv.appendChild(qinput);
+    div.appendChild(qdiv);
 
-    div.append(ansdiv)
-      .append($('<br clear="all">'));
-    
+    const img = createElement("img", {
+      class: "qimg",
+      id: `image${q}`,
+    }) as HTMLImageElement;
+    div.appendChild(img);
+    showimage(qstr, img);
+
+    const ansdiv = createElement("div", { class: "ansdiv" });
+    for (let i = 0; i < qas[q]["answers"].length; i++) {
+      ansdiv.appendChild(answerspan(q, i));
+    }
+    const delim = createElement("span", { id: `delim${q}` });
+    delim.textContent = "  ";
+    ansdiv.appendChild(delim);
+
+    div.appendChild(ansdiv);
+    const br = createElement("br");
+    br.setAttribute("clear", "all");
+    div.appendChild(br);
+
     return div;
   };
-  
+
   const maindiv = () => {
-    $("#main").children().remove(); // ブラウザから「別名で保存」すると #main に入れたデータが全部格納されてしまうので、最初に全部消しておく
-  
-    for (let i = 0; i < qas.length; i++) {
-      $("#main").append(qadiv(i));
+    const main = document.querySelector("#main");
+    if (main) {
+      while (main.firstChild) {
+        main.removeChild(main.firstChild);
+      }
+      for (let i = 0; i < qas.length; i++) {
+        main.appendChild(qadiv(i));
+      }
     }
   };
-  
+
   const secretstr = (): string => { // 質問文字列と選択された文字列をすべて接続した文字列
     return Array.from({ length: qas.length }, (_, i) => {
-      return qas[i]['question'] + qas[i]['answers'][answerArray[i]];
-    }).join('');
+      return qas[i]["question"] + qas[i]["answers"][answerArray[i]];
+    }).join("");
   };
-  
+
   const calcpass = (copy?: boolean) => { // シード文字列からパスワード文字列を生成
-    const newpass = crypt($('#seed').val() as string, secretstr());
-    $('#pass').val(newpass);
+    const seedElem = document.querySelector("#seed") as HTMLInputElement;
+    const passElem = document.querySelector("#pass") as HTMLInputElement;
+    if (seedElem && passElem) {
+      const newpass = crypt(seedElem.value, secretstr());
+      passElem.value = newpass;
+    }
   };
-  
+
   const calcseed = () => { // パスワード文字列からシード文字列を生成
-    const newseed = crypt($('#pass').val() as string, secretstr());
-    $('#seed').val(newseed);
-    data['seed'] = newseed;
+    const seedElem = document.querySelector("#seed") as HTMLInputElement;
+    const passElem = document.querySelector("#pass") as HTMLInputElement;
+    if (seedElem && passElem) {
+      const newseed = crypt(passElem.value, secretstr());
+      seedElem.value = newseed;
+      data["seed"] = newseed;
+    }
   };
-  
+
   const sendfile = (files: FileList) => {
     const file = files[0];
     const fileReader = new FileReader();
@@ -189,62 +255,67 @@ export function editor(dataArg?: any): void {
         lines.forEach((line) => {
           const m = line.match(/^\s*const data = (.*)$/);
           if (m) {
-            const json = m[1].replace(/;.*$/, '');
+            const json = m[1].replace(/;.*$/, "");
             data = JSON.parse(json);
           }
         });
       }
-      const qas = data['qas'];
-      const seed = data['seed'];
+      const qas = data["qas"];
+      const seed = data["seed"];
 
-      globaldata['qas'] = data['qas'];
-      globaldata['seed'] = data['seed'];
+      globaldata["qas"] = data["qas"];
+      globaldata["seed"] = data["seed"];
 
       questions = [];
       for (let i = 0; i < qas.length; i++) {
-        questions.push(qas[i]['question']);
+        questions.push(qas[i]["question"]);
       }
-      answers = qas[0]['answers'];
-      
-      $('#seed').val(seed);
-      $("#main").children().remove();
+      answers = qas[0]["answers"];
+
+      const seedElem = document.querySelector("#seed") as HTMLInputElement;
+      if (seedElem) seedElem.value = seed;
       maindiv();
       calcpass();
     };
     fileReader.readAsText(file);
   };
-  
+
   const init = () => {
-    lib.show('#editor');
-    lib.make_html(data);
+    lib.show("#editor");
 
     //
     // seedかパスワードを編集したら相手を変更
     //
-    $('#seed').keyup((e) => {
-      data['seed'] = $('#seed').val();
-      calcpass();
-    });
-    $('#pass').keyup((e) => {
-      calcseed();
-    });
+    const seedElem = document.querySelector("#seed") as HTMLInputElement;
+    const passElem = document.querySelector("#pass") as HTMLInputElement;
 
-    $('#seed').val(data.seed);
+    if (seedElem) {
+      seedElem.addEventListener("keyup", () => {
+        data["seed"] = seedElem.value;
+        calcpass();
+      });
+      seedElem.value = data.seed;
+    }
+
+    if (passElem) {
+      passElem.addEventListener("keyup", () => {
+        calcseed();
+      });
+    }
 
     // Drag&Drop対応
-    $('body')
-      .bind("dragover", (e) => {
-        return false;
-      })
-      .bind("dragend", (e) => {
-        return false;
-      })
-      .bind("drop", (e) => {
-        e.preventDefault(); // デフォルトは「ファイルを開く」
-        const files = (e.originalEvent as DragEvent).dataTransfer?.files;
-        if (files) sendfile(files);
-        return files;
-      });
+    document.body.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      return false;
+    });
+    document.body.addEventListener("dragend", (e) => {
+      return false;
+    });
+    document.body.addEventListener("drop", (e) => {
+      e.preventDefault(); // デフォルトは「ファイルを開く」
+      const files = e.dataTransfer?.files;
+      if (files) sendfile(files);
+    });
 
     maindiv();
     calcpass();

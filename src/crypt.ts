@@ -6,21 +6,21 @@
 // Converted to TypeScript: 2026/01/07
 //
 
-import { MD5_hexhash } from './md5.ts';
+import { MD5_hexhash } from "./md5.ts";
 
 // 文字種ごとに置換を行なうためのテーブル
 const origcharset = [
-  'abcdefghijklmnopqrstuvwxyz',
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  '0123456789',
-  '-',
-  '~!@#$%^&*()_=+[{]}|;:.,?',
-  ' ',
-  "\"'/<>\\`"
+  "abcdefghijklmnopqrstuvwxyz",
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "0123456789",
+  "-",
+  "~!@#$%^&*()_=+[{]}|;:.,?",
+  " ",
+  "\"'/<>\\`",
 ];
 
 const hexcharset = [
-  "0123456789abcdef"
+  "0123456789abcdef",
 ];
 
 let charset = origcharset;
@@ -52,7 +52,7 @@ function crypt_char(c: string, n: number): string {
 function utf2bytestr(text: string): string {
   let result = "";
   if (text == null) return result;
-  
+
   for (let i = 0; i < text.length; i++) {
     const c = text.charCodeAt(i);
     if (c <= 0x7f) {
@@ -78,17 +78,19 @@ function utf2bytestr(text: string): string {
 export function crypt(seed: string, secret_string: string): string {
   // ハッシュ値ぽいときHex文字だけ使うことにする。ちょっと心配だが...
   // Hex文字が32文字以上で、数字と英字が入ってればまぁハッシュ値と思って良いのではないか...
-  if (seed.match(/[0-9a-f]{32}/) && seed.match(/[a-f]/) && seed.match(/[0-9]/)) {
+  if (
+    seed.match(/[0-9a-f]{32}/) && seed.match(/[a-f]/) && seed.match(/[0-9]/)
+  ) {
     charset = hexcharset;
   } else {
     charset = origcharset;
   }
-  
+
   // secret_stringのMD5の32バイト値の一部を取り出して数値化し、
   // その値にもとづいて文字置換を行なう
   let hash = MD5_hexhash(utf2bytestr(secret_string));
-  let res = '';
-  
+  let res = "";
+
   for (let i = 0; i < seed.length; i++) {
     const j = i % 8;
 
@@ -100,6 +102,6 @@ export function crypt(seed: string, secret_string: string): string {
     const n = parseInt(s, 16);
     res += crypt_char(seed[i], n + i);
   }
-  
+
   return res;
 }

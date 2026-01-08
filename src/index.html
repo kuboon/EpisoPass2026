@@ -2,261 +2,366 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="google-site-verification" content="fOG0LSEVum2LKSxNNZpX912Aej7gh1Udx2ZzUEmL-nk" />
+    <meta
+      name="google-site-verification"
+      content="fOG0LSEVum2LKSxNNZpX912Aej7gh1Udx2ZzUEmL-nk"
+    />
 
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="episopass.css">
     <title>EpisoPass</title>
   </head>
-  
-  <body>
-    <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 990; overflow: unset">
-      <div style="padding:10px;background-color:#ffffff;">
-	<div class='topmenu'>
-	  <span id="descbutton"><div id='descbuttondiv' class='topmenuitem'>EpisoPass概要</div></span>
-	  <span id="episodbbutton"><div id='episodbbuttondiv' class='topmenuitem'>問題プール編集</div></span>
-	  <span id="editbutton"><div id='editbuttondiv' class='topmenuitem'>EpisoPassページ作成</div></span>
 
-	  <span id="dasbutton" style="display:none;"><div id='dasbuttondiv' class='topmenuitem'>EpisoPassページ生成</div></span>
-	</div>
-	<hr>
+  <body>
+    <div
+      style="position: fixed; top: 0; left: 0; right: 0; z-index: 990; overflow: unset"
+    >
+      <div style="padding: 10px; background-color: #ffffff">
+        <div class="topmenu">
+          <span id="descbutton"><div id="descbuttondiv" class="topmenuitem">
+              EpisoPass概要
+            </div></span>
+          <span id="episodbbutton"><div
+              id="episodbbuttondiv"
+              class="topmenuitem"
+            >
+              問題プール編集
+            </div></span>
+          <span id="editbutton"><div id="editbuttondiv" class="topmenuitem">
+              EpisoPassページ作成
+            </div></span>
+
+          <span id="dasbutton" style="display: none"><div
+              id="dasbuttondiv"
+              class="topmenuitem"
+            >
+              EpisoPassページ生成
+            </div></span>
+        </div>
+        <hr>
       </div>
       <a href="index.html">
-	<img src="episopass.png"
-	     height=40 style="position: fixed; top: 10px; left: 10px; right: 0; z-index: 990; overflow: unset;">
+        <img
+          src="episopass.png"
+          height="40"
+          style="position: fixed; top: 10px; left: 10px; right: 0; z-index: 990; overflow: unset"
+        >
       </a>
     </div>
 
-    <div id="contents" style="width:95%;margin:auto;max-width:800px">
-      <div id="description" style="display:none;">
-	<h2>EpisoPass概要</h2>
-	
-	<ul>
-	  <li><b>EpisoPass</b>&#8482; は、個人的な記憶をもとにパスワードを生成するシステムです。</li>
-	  <li>
-	    自分だけが知っている記憶を利用して、複雑なパスワードを生成できます。
-	  </li>
-	  <li>
-	    たとえば<a href="http://pitecan.com/p/Amazon_masui@pitecan.com.html"><b>増井のEpisoPassページ</b></a>の問題に正しく答えると
-	    Amazonのパスワードが生成されます。
-	  </li>
-	  <li>
-	    <b><i>秘密ファイルを管理したり、パスワードを記憶したりする必要がありません。</i></b>
-	  </li>
-	</ul>
+    <div id="contents" style="width: 95%; margin: auto; max-width: 800px">
+      <div id="description" style="display: none">
+        <h2>EpisoPass概要</h2>
 
-	<h3>EpisoPassページの作成</h3>
+        <ul>
+          <li>
+            <b>EpisoPass</b>&#8482;
+            は、個人的な記憶をもとにパスワードを生成するシステムです。
+          </li>
+          <li>
+            自分だけが知っている記憶を利用して、複雑なパスワードを生成できます。
+          </li>
+          <li>
+            たとえば<a
+              href="http://pitecan.com/p/Amazon_masui@pitecan.com.html"
+            ><b>増井のEpisoPassページ</b></a>の問題に正しく答えると
+            Amazonのパスワードが生成されます。
+          </li>
+          <li>
+            <b><i
+              >秘密ファイルを管理したり、パスワードを記憶したりする必要がありません。</i></b>
+          </li>
+        </ul>
 
-	<ul>
-	  <li>
-	    EpisoPassページ作成には<b>問題プール</b>を使います。
-	  </li>
-	  <li>
-	    問題プールは、秘密の質問と回答候補を並べたものです。
-	    例:
-	    <a href="https://gist.githubusercontent.com/masui/12e3c589f5eb91558fc4843f1c0a20e4/raw/4573261cbc32ca6badda7eb9c2e93e2a56ad1161/kenmei.json">県名</a> /
-	    <a href="https://gist.githubusercontent.com/masui/58adeb373551b320ff601f6e77ef0c1f/raw/77ba7747924ecb9e9a0e373b0e38b33a31e6e0d0/local.json">ローカル地名</a> /
-	    <a href="https://gist.githubusercontent.com/masui/a035539ad0ddebad9036fe903ec3f4e8/raw/10a8b298fcca3cd8ac6810d171257ea7406493bf/kaigai.json">海外</a> /
-	    <a href="https://gist.githubusercontent.com/masui/53c63b8deeca5b1d072ea4812cbb57f3/raw/80e1537013665f237a9df5dd65e9e4242e14d7ab/episopass.json">人名</a>
-	  </li>
-	  <li>
-	    Webに置いた問題プールデータをURL引数に指定できます。
-	    例:
-	    <a href="?data=https://gist.githubusercontent.com/masui/12e3c589f5eb91558fc4843f1c0a20e4/raw/4573261cbc32ca6badda7eb9c2e93e2a56ad1161/kenmei.json">県名</a> /
-	    <a href="?data=https://gist.githubusercontent.com/masui/58adeb373551b320ff601f6e77ef0c1f/raw/77ba7747924ecb9e9a0e373b0e38b33a31e6e0d0/local.json">ローカル地名</a> /
-	    <a href="?data=https://gist.githubusercontent.com/masui/a035539ad0ddebad9036fe903ec3f4e8/raw/10a8b298fcca3cd8ac6810d171257ea7406493bf/kaigai.json">海外</a> /
-	    <a href="?data=https://gist.githubusercontent.com/masui/53c63b8deeca5b1d072ea4812cbb57f3/raw/80e1537013665f237a9df5dd65e9e4242e14d7ab/episopass.json">人名</a>
-	  </li>
-	  <li>
-	    <a href='#' onclick="episodb.episodb()"><b>問題プール編集</b></a>タブを選択すると
-	    問題プールを編集/セーブ/ロードできます。
-	  </li>
-	  <li>
-	    <a href='#' onclick="editor.editor()"><b>EpisoPassページ作成</b></a>タブを選択すると、
-	    問題プールからランダムに問題が10個選択され、正答を選択してパスワード生成可能になります。
-	  </li>
-	  <ul>
-	    <li>
-	      問題数はURL引数で指定できます (e.g. <code>?n=5</code>)
-	    </li>
-	  </ul>
-	  <li>
-	    正答を選択した後で <b>HTML生成</b> ボタンを押し、
-	    <b>DAS</b>パタンを指定してから「EpisoPassページダウンロード」ボタンをクリックすると、
-	    パスワードを生成するための<b>EpisoPassページ</b>のHTMLファイルを取得できます。
-	  </li>
-	  <ul>
-	    <li>
-	      DASとは「<a href="https://en.wikipedia.org/wiki/Draw_a_Secret">Draw-a-Secret</a>」の略で、
-	      自分だけが知っている秘密のパタンのことです。
-	    </li>
-	    <li>
-	      描きやすいDASパタンを登録するとEpisoPassページでの回答入力が楽になります。
-	    </li>
-	  </ul>
-	  <li>
-	    取得したEpisoPassページをWebに置くと、どこからでもパスワードを生成できるようになります。
-	  </li>
-	  <ul>
-	    <li>
-	      例: <a href="http://pitecan.com/p/Amazon_masui@pitecan.com.html">Amazon_masui@pitecan.com</a>
-	    </li>
-	  </ul>
-	  <li>
-	    自分で作成したEpisoPassページを他人が利用するのは不可能です。
-	  </li>
-	  <ul>
-	    <li>
-	      自分だけが知っている記憶にもとづく正解を入力しない限り、正しいパスワードを生成することはできません。
-	    </li>
-	  </ul>
-	</ul>
-	
-	<h3>関連情報</h3>
-	
-	<ul>
-	  <li>
-	    <a href='https://scrapbox.io/EpisoPass/'>解説Scrapbox</a>
-	  </li>
-	  <li>
-	    <a href='http://www.pitecan.com/papers/WISS2013Masui.pdf'>論文</a>
-	  </li>
-	  <li>
-	    <a href='https://github.com/masui/EpisoPass2021'>GitHub</a>
-	  </li>
-	  <li>
-	    <a href='https://www.youtube.com/watch?v=ZHR8qmwnEPY'>デモビデオ</a>
-	  </li>
-	  <li>
-	    <a href='mailto:masui@pitecan.com'>質問/連絡</a>
-	  </li>
-	</ul>
+        <h3>EpisoPassページの作成</h3>
+
+        <ul>
+          <li>
+            EpisoPassページ作成には<b>問題プール</b>を使います。
+          </li>
+          <li>
+            問題プールは、秘密の質問と回答候補を並べたものです。 例:
+            <a
+              href="https://gist.githubusercontent.com/masui/12e3c589f5eb91558fc4843f1c0a20e4/raw/4573261cbc32ca6badda7eb9c2e93e2a56ad1161/kenmei.json"
+            >県名</a> /
+            <a
+              href="https://gist.githubusercontent.com/masui/58adeb373551b320ff601f6e77ef0c1f/raw/77ba7747924ecb9e9a0e373b0e38b33a31e6e0d0/local.json"
+            >ローカル地名</a> /
+            <a
+              href="https://gist.githubusercontent.com/masui/a035539ad0ddebad9036fe903ec3f4e8/raw/10a8b298fcca3cd8ac6810d171257ea7406493bf/kaigai.json"
+            >海外</a> /
+            <a
+              href="https://gist.githubusercontent.com/masui/53c63b8deeca5b1d072ea4812cbb57f3/raw/80e1537013665f237a9df5dd65e9e4242e14d7ab/episopass.json"
+            >人名</a>
+          </li>
+          <li>
+            Webに置いた問題プールデータをURL引数に指定できます。 例:
+            <a
+              href="?data=https://gist.githubusercontent.com/masui/12e3c589f5eb91558fc4843f1c0a20e4/raw/4573261cbc32ca6badda7eb9c2e93e2a56ad1161/kenmei.json"
+            >県名</a> /
+            <a
+              href="?data=https://gist.githubusercontent.com/masui/58adeb373551b320ff601f6e77ef0c1f/raw/77ba7747924ecb9e9a0e373b0e38b33a31e6e0d0/local.json"
+            >ローカル地名</a> /
+            <a
+              href="?data=https://gist.githubusercontent.com/masui/a035539ad0ddebad9036fe903ec3f4e8/raw/10a8b298fcca3cd8ac6810d171257ea7406493bf/kaigai.json"
+            >海外</a> /
+            <a
+              href="?data=https://gist.githubusercontent.com/masui/53c63b8deeca5b1d072ea4812cbb57f3/raw/80e1537013665f237a9df5dd65e9e4242e14d7ab/episopass.json"
+            >人名</a>
+          </li>
+          <li>
+            <a href="#" onclick="episodb.episodb()"><b
+              >問題プール編集</b></a>タブを選択すると
+            問題プールを編集/セーブ/ロードできます。
+          </li>
+          <li>
+            <a href="#" onclick="editor.editor()"><b
+              >EpisoPassページ作成</b></a>タブを選択すると、
+            問題プールからランダムに問題が10個選択され、正答を選択してパスワード生成可能になります。
+          </li>
+          <ul>
+            <li>
+              問題数はURL引数で指定できます (e.g. <code>?n=5</code>)
+            </li>
+          </ul>
+          <li>
+            正答を選択した後で <b>HTML生成</b> ボタンを押し、
+            <b
+            >DAS</b>パタンを指定してから「EpisoPassページダウンロード」ボタンをクリックすると、
+            パスワードを生成するための<b
+            >EpisoPassページ</b>のHTMLファイルを取得できます。
+          </li>
+          <ul>
+            <li>
+              DASとは「<a href="https://en.wikipedia.org/wiki/Draw_a_Secret"
+              >Draw-a-Secret</a>」の略で、
+              自分だけが知っている秘密のパタンのことです。
+            </li>
+            <li>
+              描きやすいDASパタンを登録するとEpisoPassページでの回答入力が楽になります。
+            </li>
+          </ul>
+          <li>
+            取得したEpisoPassページをWebに置くと、どこからでもパスワードを生成できるようになります。
+          </li>
+          <ul>
+            <li>
+              例: <a href="http://pitecan.com/p/Amazon_masui@pitecan.com.html"
+              >Amazon_masui@pitecan.com</a>
+            </li>
+          </ul>
+          <li>
+            自分で作成したEpisoPassページを他人が利用するのは不可能です。
+          </li>
+          <ul>
+            <li>
+              自分だけが知っている記憶にもとづく正解を入力しない限り、正しいパスワードを生成することはできません。
+            </li>
+          </ul>
+        </ul>
+
+        <h3>関連情報</h3>
+
+        <ul>
+          <li>
+            <a href="https://scrapbox.io/EpisoPass/">解説Scrapbox</a>
+          </li>
+          <li>
+            <a href="http://www.pitecan.com/papers/WISS2013Masui.pdf">論文</a>
+          </li>
+          <li>
+            <a href="https://github.com/masui/EpisoPass2021">GitHub</a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=ZHR8qmwnEPY">デモビデオ</a>
+          </li>
+          <li>
+            <a href="mailto:masui@pitecan.com">質問/連絡</a>
+          </li>
+        </ul>
       </div>
 
-      <div id="easy" style="display:none;">
-	<div id="easydiv">
-	  <table>
-	    <tbody>
-	      <tr>
-		<td>
-		  <p style="margin:5px;">名前リスト</p>
-		  <textarea id="easyanswers" class="easy" rows="5"></textarea>
-		</td>
-	      </tr>
-	      <tr>
-		<td>
-		  <p style="margin:5px;">秘密の質問リスト</p>
-		  <textarea id="easyquestions" class="easy" rows="5"></textarea>
-		</td>
-	      </tr>
-	      <tr>
-		<td>
-		  <input type="button" id="startedit" class="button" value="問題を作成してパスワード生成">
-		</td>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
+      <div id="easy" style="display: none">
+        <div id="easydiv">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <p style="margin: 5px">名前リスト</p>
+                  <textarea id="easyanswers" class="easy" rows="5"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p style="margin: 5px">秘密の質問リスト</p>
+                  <textarea id="easyquestions" class="easy" rows="5"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="button"
+                    id="startedit"
+                    class="button"
+                    value="問題を作成してパスワード生成"
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div id="editor" style="display:none;"> <!-- 編集画面 -->
-	<h2>EpisoPassページ作成</h2>
-	
-	<ul>
-	  <li>問題に対する正しい答をすべて選択してください。</li>
-	  <li>問題と答を自由に編集できます。</li>
-	  <li>ファイルをドロップすると問題データがロードされます。</li>
-	</ul>
-	
-	<div>
-	  <b>Seed</b>: <input type="text" id="seed" class="seedpass" width=100>
-	  <br>
-	  <b>Password</b>: <input type="text" id="pass" class="seedpass" width=100>
-	</div>
-	<p></p>
-	
-	<div id="main">
-	</div>
-      </div>
-      
-      <div id="dasmaker" style="display:none;"> <!-- DAS作成画面 -->
-	<span>作成画面</span>
-      </div>
-      
-      <div id="das" style="display:none;"> <!-- 利用画面 -->
-	<span>利用画面</span>
-      </div>
-      
-      <div id="episodb" style="display:none;"> <!-- 簡単登録画面 -->
-	<h2>問題プール編集</h2>
+      <div id="editor" style="display: none">
+        <!-- 編集画面 -->
+        <h2>EpisoPassページ作成</h2>
 
-	<ul>
-	  <li>EpisoPassページ作成には<b>問題プール</b>を利用します。</li>
-	  <ul>
-	    <li>
-	      サンプル:
-	      <a href="?data=https://gist.githubusercontent.com/masui/12e3c589f5eb91558fc4843f1c0a20e4/raw/4573261cbc32ca6badda7eb9c2e93e2a56ad1161/kenmei.json">県名</a> /
-	      <a href="?data=https://gist.githubusercontent.com/masui/58adeb373551b320ff601f6e77ef0c1f/raw/77ba7747924ecb9e9a0e373b0e38b33a31e6e0d0/local.json">ローカル地名</a> / 
-	      <a href="?data=https://gist.githubusercontent.com/masui/a035539ad0ddebad9036fe903ec3f4e8/raw/10a8b298fcca3cd8ac6810d171257ea7406493bf/kaigai.json">海外</a> /
-	      <a href="?data=https://gist.githubusercontent.com/masui/53c63b8deeca5b1d072ea4812cbb57f3/raw/80e1537013665f237a9df5dd65e9e4242e14d7ab/episopass.json">人名</a> /
-	      <a href="?data=https://gist.githubusercontent.com/masui/840976b8c1356b78b06444ae98530235/raw/442bd8f6b0d2df1646927312c6628fa97dc4b4ac/empty.json">空データ</a>
-	    </li>
-	  </ul>
-	  <li>問題プールはブラウザに保存されるので、前回使ったものを再利用できます。</li>
-	</ul>
+        <ul>
+          <li>問題に対する正しい答をすべて選択してください。</li>
+          <li>問題と答を自由に編集できます。</li>
+          <li>ファイルをドロップすると問題データがロードされます。</li>
+        </ul>
 
-	<blockquote>
-	  <form id="saveload">
-	    <input type="button" value="問題プールをセーブ" onclick="episodb.JSONデータセーブ()" style="margin:3px;" />
-	    問題と回答のリストをローカルファイルにセーブします
-	    <br/>
-            <input type="button" value="問題プールをロード" onclick="$('#fileload').click()"  style="margin:3px;"/>
-	    問題プールのデータをローカルファイルから読み込みます
-            <input type="file" id="fileload" style="display:none;" accept="text/json" onclick="episodb.JSONデータロード()">
-	  </form>
-	</blockquote>
-	
-	<h3>回答リスト</h3>
-	  
-	<ul>
-	  <li>地名や人名を30個以上リストしてください。</li>
-	</ul>
-	
-	<blockquote>
-	  <form>
-	    <!--
+        <div>
+          <b>Seed</b>: <input
+            type="text"
+            id="seed"
+            class="seedpass"
+            width="100"
+          >
+          <br>
+          <b>Password</b>: <input
+            type="text"
+            id="pass"
+            class="seedpass"
+            width="100"
+          >
+        </div>
+        <p></p>
+
+        <div id="main"></div>
+      </div>
+
+      <div id="dasmaker" style="display: none">
+        <!-- DAS作成画面 -->
+        <span>作成画面</span>
+      </div>
+
+      <div id="das" style="display: none">
+        <!-- 利用画面 -->
+        <span>利用画面</span>
+      </div>
+
+      <div id="episodb" style="display: none">
+        <!-- 簡単登録画面 -->
+        <h2>問題プール編集</h2>
+
+        <ul>
+          <li>EpisoPassページ作成には<b>問題プール</b>を利用します。</li>
+          <ul>
+            <li>
+              サンプル:
+              <a
+                href="?data=https://gist.githubusercontent.com/masui/12e3c589f5eb91558fc4843f1c0a20e4/raw/4573261cbc32ca6badda7eb9c2e93e2a56ad1161/kenmei.json"
+              >県名</a> /
+              <a
+                href="?data=https://gist.githubusercontent.com/masui/58adeb373551b320ff601f6e77ef0c1f/raw/77ba7747924ecb9e9a0e373b0e38b33a31e6e0d0/local.json"
+              >ローカル地名</a> /
+              <a
+                href="?data=https://gist.githubusercontent.com/masui/a035539ad0ddebad9036fe903ec3f4e8/raw/10a8b298fcca3cd8ac6810d171257ea7406493bf/kaigai.json"
+              >海外</a> /
+              <a
+                href="?data=https://gist.githubusercontent.com/masui/53c63b8deeca5b1d072ea4812cbb57f3/raw/80e1537013665f237a9df5dd65e9e4242e14d7ab/episopass.json"
+              >人名</a> /
+              <a
+                href="?data=https://gist.githubusercontent.com/masui/840976b8c1356b78b06444ae98530235/raw/442bd8f6b0d2df1646927312c6628fa97dc4b4ac/empty.json"
+              >空データ</a>
+            </li>
+          </ul>
+          <li>
+            問題プールはブラウザに保存されるので、前回使ったものを再利用できます。
+          </li>
+        </ul>
+
+        <blockquote>
+          <form id="saveload">
+            <input
+              type="button"
+              value="問題プールをセーブ"
+              onclick="episodb.JSONデータセーブ()"
+              style="margin: 3px"
+            />
+            問題と回答のリストをローカルファイルにセーブします
+            <br />
+            <input
+              type="button"
+              value="問題プールをロード"
+              onclick="document.querySelector('#fileload').click()"
+              style="margin: 3px"
+            />
+            問題プールのデータをローカルファイルから読み込みます
+            <input
+              type="file"
+              id="fileload"
+              style="display: none"
+              accept="text/json"
+              onclick="episodb.JSONデータロード()"
+            >
+          </form>
+        </blockquote>
+
+        <h3>回答リスト</h3>
+
+        <ul>
+          <li>地名や人名を30個以上リストしてください。</li>
+        </ul>
+
+        <blockquote>
+          <form>
+            <!--
 	    <input type="button" class="button" value="ランダムに県名を追加" onclick="episodb.ランダムに回答を追加(db.県名リスト)">
 	    <input type="button" class="button" value="ランダムに都市名を追加" onclick="episodb.重みづけランダムに都市を追加()">
 	    <input type="button" class="button" value="ランダムに町名を追加" onclick="episodb.ランダムに回答を追加(db.町名リスト)">
 	    -->
-	    <input type="button" class="button" value="シャッフル" onclick="episodb.データシャッフル(answers); episodb.リスト表示({リスト:answers, フォームid:'answers', クラス:'answerinput', 改行あり:false});" >
-	  </form>
-      
-	  <form id="answers">
-	  </form>
-	</blockquote>
-	  
+            <input
+              type="button"
+              class="button"
+              value="シャッフル"
+              onclick="episodb.データシャッフル(answers); episodb.リスト表示({リスト:answers, フォームid:'answers', クラス:'answerinput', 改行あり:false});"
+            >
+          </form>
 
-	<h3>問題リスト</h3>
-    
-	<ul>
-	  <li>上のリストの項目のひとつを特定できる<b>秘密の問題</b>を10個以上記述してください。</li>
-	  <li>他人が知らない<b>事実</b>で、将来忘れないようなエピソードを書いてください。</li>
-	</ul>
-    
-	<blockquote>
-	  <form>
-	    <!--
+          <form id="answers"></form>
+        </blockquote>
+
+        <h3>問題リスト</h3>
+
+        <ul>
+          <li>
+            上のリストの項目のひとつを特定できる<b
+            >秘密の問題</b>を10個以上記述してください。
+          </li>
+          <li>
+            他人が知らない<b
+            >事実</b>で、将来忘れないようなエピソードを書いてください。
+          </li>
+        </ul>
+
+        <blockquote>
+          <form>
+            <!--
 	    <input type="button" class="button" value="ランダムに問題を追加" onclick="episodb.ランダムに問題を追加()">
 	    -->
-	    <input type="button" class="button" value="シャッフル"
-		   onclick="episodb.データシャッフル(questions); episodb.リスト表示({リスト:questions, フォームid:'questions', クラス:'questioninput', 改行あり:true});" >
-	  </form>
-      
-	  <form id="questions">
-	  </form>
-	</blockquote>
+            <input
+              type="button"
+              class="button"
+              value="シャッフル"
+              onclick="episodb.データシャッフル(questions); episodb.リスト表示({リスト:questions, フォームid:'questions', クラス:'questioninput', 改行あり:true});"
+            >
+          </form>
 
+          <form id="questions"></form>
+        </blockquote>
       </div>
     </div>
 
